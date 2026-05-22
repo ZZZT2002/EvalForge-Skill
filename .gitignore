@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Env & secrets
+.env
+.env.local
+*.key
+
+# Embedding model cache (local download)
+.cache/
+models_cache/
+
+# Local generation artifacts (keep version_history, drop intermediates)
+data/candidates_v*.json
+data/badcases.json
+data/human_review_log.json
+data/mock_responses.json
+
+# Reports are regenerated, keep templates only
+# data/reports/  # 不忽略，保留生成产物供答辩
