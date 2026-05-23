@@ -18,6 +18,8 @@ class ExpectedToolCall(BaseModel):
 
 
 class TestCase(BaseModel):
+    __test__ = False  # 告诉 pytest 这不是测试类（避免 PytestCollectionWarning）
+
     task_id: str
     skill_definition: SkillDefinition
     prompt: str
