@@ -6,8 +6,17 @@ from typing import Any, Dict, List
 class BaseAdapter:
     name: str = "base"
 
-    def call(self, prompt: str, tools_schema: List[Dict[str, Any]]) -> str:
-        """返回 Agent 的原始 raw_response 字符串"""
+    def call(
+        self,
+        prompt: str,
+        tools_schema: List[Dict[str, Any]],
+        task_id: str = "",
+    ) -> str:
+        """返回 Agent 的原始 raw_response 字符串。
+
+        task_id 仅 MockAdapter 使用（用作查表 key）；REAL Adapter 接受但忽略它，
+        保证 evaluator/pipeline.py 在 MOCK / REAL 之间路由时无须修改调用方。
+        """
         raise NotImplementedError
 
 

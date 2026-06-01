@@ -14,6 +14,7 @@ import random
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import config
 from config import (
     BADCASES_PATH,
     BADCASE_THRESHOLD,
@@ -123,29 +124,48 @@ def save_json(obj, path: str) -> None:
         json.dump(obj, f, ensure_ascii=False, indent=2)
 
 
+def _build_adapter(agent: str, benchmark: List[dict], error_rate: float) -> BaseAdapter:
+    """按 config.EVAL_MODE 路由：MOCK → MockAdapter；REAL → 真实 Adapter。"""
+    if config.EVAL_MODE == "REAL":
+        if agent == "deepseek":
+            from evaluator.adapters.deepseek_adapter import DeepSeekAdapter
+            return DeepSeekAdapter()
+        if agent == "openai":
+            from evaluator.adapters.openai_adapter import OpenAIAdapter
+            return OpenAIAdapter()
+        raise ValueError(f"REAL 模式下未实现的 agent: {agent}")
+    # MOCK 模式：用预设响应表
+    responses = build_simulated_responses(
+        benchmark, error_rate=error_rate, seed=(hash(agent) & 0xFFFF) or 1
+    )
+    adapter = MockAdapter(responses=responses)
+    adapter.name = agent
+    return adapter
+
+
 def run(
     version: str = "1.0.0",
     error_rates: Optional[Dict[str, float]] = None,
     output_dir: str = REPORTS_DIR,
 ) -> dict:
-    """MOCK 模式：跑两个模拟 Agent，写 evaluation_v*.md 与 badcases.json。"""
+    """跑两个 Agent，写 evaluation_v*.md 与 badcases.json。
+
+    MOCK 模式：MockAdapter + 预设扰动响应。
+    REAL 模式：按 agent 名路由到真实 Adapter（仅当 config.EVAL_MODE=REAL）。
+    """
     benchmark = load_benchmark(version)
     error_rates = error_rates or {"deepseek": 0.10, "qwen": 0.25}
 
     results_by_agent: Dict[str, List[dict]] = {}
     all_badcases: List[dict] = []
     for agent, err in error_rates.items():
-        responses = build_simulated_responses(
-            benchmark, error_rate=err, seed=(hash(agent) & 0xFFFF) or 1
-        )
-        adapter = MockAdapter(responses=responses)
-        adapter.name = agent
+        adapter = _build_adapter(agent, benchmark, err)
         records = evaluate(benchmark, adapter)
         results_by_agent[agent] = records
         bc = collect_badcases(records, agent_name=agent)
         all_badcases.extend(bc)
         avg = sum(r["score"]["total"] for r in records) / len(records)
-        print(f"[D8] {agent}: n={len(records)}, 均分={avg:.2f}, badcase={len(bc)}")
+        print(f"[D8] {agent} ({config.EVAL_MODE}): n={len(records)}, 均分={avg:.2f}, badcase={len(bc)}")
 
     save_json(all_badcases, BADCASES_PATH)
     print(f"[D8] badcase 累积 {len(all_badcases)} 条 → {BADCASES_PATH}")
@@ -160,6 +180,7 @@ def run(
 
     return {
         "version": f"v{version}",
+        "mode": config.EVAL_MODE,
         "agents": list(error_rates.keys()),
         "n": len(benchmark),
         "badcase": len(all_badcases),
