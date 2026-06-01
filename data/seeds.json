@@ -1718,5 +1718,371 @@
       "seed",
       "skip_log_event"
     ]
+  },
+  {
+    "task_id": "T_SAE_FB_001",
+    "skill_name": "SecureAdminExecution",
+    "difficulty": "normal",
+    "prompt": "管理员 USR_042 请求对 192.168.1.1 上 /var/log 目录中距今超过 90 天的日志进行清理，执行命令 find /var/log -mtime +90 -delete，并在操作结束后发送邮件至 ops@example.com。",
+    "expected_tool_calls": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_042",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "find /var/log -mtime +90 -delete"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "ops@example.com",
+          "content": "已在 192.168.1.1 完成 /var/log 下 90 天前日志清理"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_SAE_002_V04",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_SAE_FB_002",
+    "skill_name": "SecureAdminExecution",
+    "difficulty": "normal",
+    "prompt": "用户 USR_888 请求对 172.16.0.10 执行清理操作：删除 /var/log 目录中修改时间超过 90 天的日志文件（命令为 find /var/log -mtime +90 -delete），任务完成后需发送邮件至 ops@example.com 进行告知。",
+    "expected_tool_calls": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_888",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "find /var/log -mtime +90 -delete"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "ops@example.com",
+          "content": "已在 172.16.0.10 完成 /var/log 下 90 天前日志清理"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_SAE_002_V10",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_CTH_FB_001",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "prompt": "接到来电用户 USR_777 的询问，关于商品 ITEM_5005（智能手表）目前是否仍有库存并可以安排发货。请将此咨询工单按 LOW 优先级进行处理，并通过电子邮件将结果回复至 user521@example.com。",
+    "expected_tool_calls": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_5005 智能手表库存咨询",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user521@example.com",
+          "content": "您的 ITEM_5005 库存咨询工单已建立"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_CTH_004_V01",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_CTH_FB_002",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "prompt": "用户 USR_777 需要为 ITEM_9999（婴儿推车）登记缺货提醒。请以 LOW 优先级处理此工单，并通过 Email 告知 user633@example.com 补货后会再联系。",
+    "expected_tool_calls": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_9999"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_9999 婴儿推车缺货登记通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您的 ITEM_9999 缺货登记已收到,到货后会另行通知"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_CTH_005_V09",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_DEM_FB_001",
+    "skill_name": "DataExportWithMasking",
+    "difficulty": "normal",
+    "prompt": "USR_103 要求提取 customers 表中 segment 为 'VIP' 的客户记录（需包含 name 和 email 字段），经审核确认后对 name 和 email 进行脱敏处理，随后将处理后的邮箱数据发送至 marketing@example.com。",
+    "expected_tool_calls": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "READ"
+        }
+      },
+      {
+        "tool": "Query_DB",
+        "args": {
+          "table": "customers",
+          "conditions": {
+            "segment": "VIP"
+          }
+        }
+      },
+      {
+        "tool": "Mask_PII",
+        "args": {
+          "data": "<customers 查询返回的 name/email>",
+          "fields": [
+            "name",
+            "email"
+          ]
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "marketing@example.com",
+          "content": "<已脱敏的 VIP 客户名单>"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_DEM_005_V00",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_DEM_FB_002",
+    "skill_name": "DataExportWithMasking",
+    "difficulty": "normal",
+    "prompt": "请处理 USR_103 的请求：从 activities 表中检索 type='login' 且 region='北京' 的活动数据，字段需包含 user_id 和 ip_address。确认无误后，对 ip_address 进行脱敏处理，并将结果通过 Email 发送至 analytics@example.com。",
+    "expected_tool_calls": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "READ"
+        }
+      },
+      {
+        "tool": "Query_DB",
+        "args": {
+          "table": "activities",
+          "conditions": {
+            "type": "login",
+            "region": "北京"
+          }
+        }
+      },
+      {
+        "tool": "Mask_PII",
+        "args": {
+          "data": "<activities 查询返回的 user_id/ip_address>",
+          "fields": [
+            "ip_address"
+          ]
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "analytics@example.com",
+          "content": "<已脱敏的北京地区登录活动>"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_DEM_006_V02",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_IAR_FB_001",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "normal",
+    "prompt": "收到监控告警：172.16.0.10 存在显著丢包现象。由运维人员 USR_001 负责处理。请先记录并核实操作员身份，随后执行 ping 诊断（命令：ping -c 5 10.0.0.1），最后将结果以短信方式发送至 +8613622223333。",
+    "expected_tool_calls": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "packet_loss_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "operator": "USR_001"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "ping -c 5 10.0.0.1"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613622223333",
+          "content": "172.16.0.10 丢包诊断完成,ping 结果已附"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_IAR_003_V04",
+    "source_agent": "deepseek",
+    "source_score": 0.0
+  },
+  {
+    "task_id": "T_IAR_FB_002",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "boundary",
+    "prompt": "10.0.0.5 发现出口流量异常激增，需要由运维人员 USR_103 进行处理。请按常规流程记录本告警事件，在确认操作员身份无误后，执行流量检查命令 iftop -P -n -t -s 5，并将结果以短信方式发送至 +8613633334444。",
+    "expected_tool_calls": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "traffic_anomaly",
+          "details": {
+            "server": "10.0.0.5",
+            "operator": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "iftop -P -n -t -s 5"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613633334444",
+          "content": "10.0.0.5 出口流量异常排查完成,iftop 结果已附"
+        }
+      }
+    ],
+    "version": "v0.2",
+    "created_at": "2026-05-31",
+    "tags": [
+      "seed",
+      "from_badcase"
+    ],
+    "source_badcase_task_id": "T_IAR_007_V02",
+    "source_agent": "deepseek",
+    "source_score": 0.0
   }
 ]
