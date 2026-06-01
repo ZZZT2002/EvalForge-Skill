@@ -228,5 +228,19 @@
 
 ## 4. 当前进度
 
-- [x] D0：PROJECT.md / PLAN.md 完成 ✅
-- [ ] D0：项目骨架 + DeepSeek API 验证 ← **下一步**
+> 截至 2026-05-31（D9 当晚）
+
+- [x] **D0** PROJECT.md / PLAN.md / 项目骨架 / DeepSeek hello demo
+- [x] **D1** models / tools_schema / skills_ontology / config
+- [x] **D2** 40 种子 + matrix_expander → ~600 候选
+- [x] **D3** llm_paraphraser + dedup → `candidates_v0.9.json`（591 条）
+- [x] **D4** 第一次答疑 ✅
+- [x] **D5** schema_validator + llm_judge + `quality_report_v1.0.0.md` → `candidates_v0.95.json`
+- [x] **D6** human_console 抽检（119/119 accept，100% 通过率）+ `benchmark_v1.0.0.json` 发布
+- [x] **D7** evaluator/adapters + normalizer + scorer + 10 个判分单测
+- [x] **D8** `evaluator/pipeline.py` 两 Agent MOCK 评测 + `evaluation_v1.0.0.md` + 73 条 badcase
+- [x] **D9** decay_detector（404 task）+ constraint_evolver（三策略）+ `benchmark_v1.1.0.json` + `decay_report_v1.1.0.md`（before/after Δ均分 = -14.48）
+- [x] **D10** feedback_injector（auto + interactive）+ 8 条 from_badcase 种子注入，膨胀后 120 个变体带 tag；`python main.py` 端到端零报错
+- [ ] **D11** 6/2 19:00 第三次答疑（准备 before/after 大图 + badcase 反向注入示例） ← **下一步**
+- [ ] **D12** 代码整理 + 仓库 README + 答辩 PPT
+- [ ] **D13** 6/4 19:00 终验
