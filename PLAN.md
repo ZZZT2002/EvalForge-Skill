@@ -241,6 +241,6 @@
 - [x] **D8** `evaluator/pipeline.py` 两 Agent MOCK 评测 + `evaluation_v1.0.0.md` + 73 条 badcase
 - [x] **D9** decay_detector（404 task）+ constraint_evolver（三策略）+ `benchmark_v1.1.0.json` + `decay_report_v1.1.0.md`（before/after Δ均分 = -14.48）
 - [x] **D10** feedback_injector（auto + interactive）+ 8 条 from_badcase 种子注入，膨胀后 120 个变体带 tag；`python main.py` 端到端零报错
-- [ ] **D11** 6/2 19:00 第三次答疑（准备 before/after 大图 + badcase 反向注入示例） ← **下一步**
-- [ ] **D12** 代码整理 + 仓库 README + 答辩 PPT
-- [ ] **D13** 6/4 19:00 终验
+- [x] **D11** 演讲稿 SPEECH_REVIEW3.md 真实数字对齐 + 130 单测全绿 + main.py 端到端零报错
+- [x] **D12** 代码整理 + README 项目自述 + 12 页 SLIDES.md 答辩大纲
+- [ ] **D13** 6/4 19:00 终验 ← **下一步**：模拟一遍 + 备份产物
