@@ -29,14 +29,16 @@ def seeds_have_feedback() -> bool:
 def main():
     print(f"[EvalForge-Skill] mode={config.EVAL_MODE} target={config.TARGET_AGENT}")
 
-    # Stage A: 构建
+    # Stage A: 构建（首跑请按 README 顺序手动跑下列三步生成 v1.0）
+    #   1) python -m generator.pipeline      → candidates_v0.9.json
+    #   2) python -m validator.quality_pipeline → candidates_v0.95.json + quality_report
+    #   3) python release.py                 → benchmark_v1.0.0.json + CHANGELOG
+    # main.py 在 v1.0 已存在时直接跳过；这是有意的：v1.0 发布是个人审参与的关卡，
+    # 不适合作为 main.py 的自动子步骤。
     if not benchmark_v1_exists():
-        print("[A] 评测集 v1.0 不存在，启动构建流程")
-        # TODO: TaskGenerator().run()
-        # TODO: DatasetValidator().run()
-        # TODO: publish_v1()
-    else:
-        print("[A] 检测到已有 v1.0，跳过构建")
+        print("[A] 评测集 v1.0 不存在，请先按 README §快速开始 完成首跑")
+        return
+    print("[A] 检测到已有 v1.0，跳过构建")
 
     # Stage B+C: 评测 + 衰退检测 + 演进（v1.1 已存在则跳过，避免重复评测）
     if benchmark_v11_exists():

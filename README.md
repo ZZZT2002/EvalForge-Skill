@@ -1,3 +1,104 @@
+# 一、项目自述
+
+> 代号 **EvalForge-Skill** ｜ 13 天个人课题（2026-05-22 立项 / 2026-06-04 终验）
+> 在 README 给的 4 个方向里选了 **Skill 能力**——因为它的"标准答案"是确定性的，可以程序判分。
+
+## 一句话
+
+**一条半自动化的 Agent 工具调用评测集生产线**：40 条人工种子 → 591 条候选 → 自动质检 + 人工抽检 → v1.0 → 两 Agent 实测 → 衰退检测 + 三策略演进 → v1.1 → badcase 反向流回种子库（闭环）。
+
+## 项目结构
+
+```
+ZZwork/
+├── README.md         ← 当前文件（项目自述 + 课题原文）
+├── PROJECT.md        ← 工程 PRD（10 节，对应 README 阶段 1-6）
+├── PLAN.md           ← 13 天每日排期 + 当前进度
+├── DESIGN.md         ← D1-D3 设计走读
+├── CHANGELOG.md      ← Benchmark 版本日志（v1.0 / v1.1）
+├── SPEECH_REVIEW1/2/3.md ← 三次答疑演讲稿
+├── config.py / models.py / tools_schema.py / skills_ontology.py
+├── main.py           ← 主流水线幂等入口（B+C+D）
+├── release.py        ← v1.0 发布脚本
+├── generator/        ← 种子膨胀 + LLM 改写 + 反向注入
+├── validator/        ← 自动质检 + 人工抽检 CLI + 发布工具
+├── evaluator/        ← Agent 适配 + 归一化 + 三维判分 + 评测 pipeline
+├── updater/          ← 衰退检测 + 三策略演进 + v1.x 发布
+├── reports/          ← Markdown 报告生成
+├── data/
+│   ├── seeds.json                  ← 40 原始 + 8 反向注入 = 48
+│   ├── version_history/            ← benchmark_v1.0.0.json / v1.1.0.json
+│   └── reports/                    ← 3 份自动报告
+└── tests/            ← 130 个单元测试全绿
+```
+
+## 快速开始
+
+**环境（一次性）**
+```bash
+python -m venv zzwork
+zzwork/Scripts/activate         # Windows
+# source zzwork/bin/activate    # macOS / Linux
+pip install -r requirements.txt
+cp .env.example .env            # 填 DEEPSEEK_API_KEY（MOCK 模式可不填）
+```
+
+**首跑 v1.0 评测集**
+```bash
+python -m generator.pipeline              # 阶段 2：seeds → candidates_v0.9.json (591 条)
+python -m validator.quality_pipeline      # 阶段 3：schema + LLM-judge → candidates_v0.95.json
+python -m validator.human_console         # 阶段 4：CLI 抽检 20%（y/n/m/s 决策）
+python release.py                         # 发布 benchmark_v1.0.0.json + CHANGELOG
+```
+
+**主流水线（v1.0 已存在则幂等跳过）**
+```bash
+python main.py                  # B 评测 + C 衰退演进 → v1.1 + D 反向注入
+```
+
+**只跑评测器单元测试（答辩"技术深度"核心证据）**
+```bash
+pytest tests/test_scorer.py tests/test_normalizer.py -v   # 三维判分 + 4 种格式容错
+pytest tests/ -q                                          # 全套 130 个测试
+```
+
+## MOCK vs REAL 模式切换
+
+`config.py` 中 `EVAL_MODE = "MOCK" | "REAL"`：
+
+| 阶段 | MOCK 行为 | REAL 行为 |
+|---|---|---|
+| 生成器 (D3) | 跳过 LLM 改写，仅做参数膨胀 | DeepSeek 改写 + TF-IDF 去重 |
+| 自动质检 (D5) | 跳过 LLM-Judge，仅 schema 强校验 | DeepSeek 三维打分 |
+| 评测器 (D8) | `MockAdapter` 按 error_rate 模拟答案 | `DeepSeekAdapter` 真调 function-calling |
+
+> 开发期一律 MOCK 跑通，临展示前再切 REAL（成本 ≤ ¥5）。所有适配器实现共享 `BaseAdapter.call()` 接口，切换无需改判分链路。
+
+## 关键产物（答辩用）
+
+| 文件 | 看点 |
+|---|---|
+| `data/version_history/benchmark_v1.0.0.json` | 591 条冻结基线 |
+| `data/version_history/benchmark_v1.1.0.json` | 衰退演进后 |
+| `data/reports/quality_report_v1.0.0.md` | 三维 LLM-Judge 均分 4.89-4.98 |
+| `data/reports/evaluation_v1.0.0.md` | DeepSeek 96.16 / Qwen 86.83 |
+| `data/reports/decay_report_v1.1.0.md` | before/after Δ均分 **-14.48**（404 task） |
+| `CHANGELOG.md` | v1.0 → v1.1 演化证据链 |
+
+## 设计要点速览
+
+- **三维判分**：`0.3·tool_recall(F1) + 0.3·tool_order(LCS) + 0.4·argument_accuracy`（顺序贪心 + `matched_expected_idx` 防刷分）
+- **演进策略**（`md5(task_id) % 3` 稳定哈希分配）：
+  - `precondition_injection`：头部注入安全前置工具
+  - `constraint_tighten`：末尾追加审计通知
+  - `adversarial_escalation`：prompt 追加诱导文字 + 强制审计日志
+- **反向注入命名空间**：`T_<SKILL>_FB_NNN`（避开原 `_V00..V19` 变体后缀）
+- **版本冻结**：所有评测脚本吃版本号，不吃"最新版"——保证跨时点分数可比
+
+详细方案见 `PROJECT.md`，每日实施轨迹见 `PLAN.md`。
+
+---
+
 # 二、课题要求
 ## 课题名称
 “EvalForge：评测集炼成工坊”——面向AI Agent的评测数据自动化构建与版本化更新维护
