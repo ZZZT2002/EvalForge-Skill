@@ -33,5 +33,9 @@ data/badcases.json
 data/human_review_log.json
 data/mock_responses.json
 
+# Sample REAL eval artifacts (per-run; commit only the merged final version)
+data/reports/*_dryrun*
+data/reports/badcases_real_sample*.json
+
 # Reports are regenerated, keep templates only
 # data/reports/  # 不忽略，保留生成产物供答辩
