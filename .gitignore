@@ -40,5 +40,8 @@ data/reports/badcases_real_sample*.json
 # Log files
 *.log
 
+# Presentation documents (local only, not for repo)
+mdDocuments/
+
 # Reports are regenerated, keep templates only
 # data/reports/  # 不忽略，保留生成产物供答辩
