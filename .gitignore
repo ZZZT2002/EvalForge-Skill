@@ -37,5 +37,8 @@ data/mock_responses.json
 data/reports/*_dryrun*
 data/reports/badcases_real_sample*.json
 
+# Log files
+*.log
+
 # Reports are regenerated, keep templates only
 # data/reports/  # 不忽略，保留生成产物供答辩

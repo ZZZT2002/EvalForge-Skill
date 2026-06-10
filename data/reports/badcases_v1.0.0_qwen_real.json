@@ -1,0 +1,2881 @@
+[
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_003_V06",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_1001 蓝牙音箱投诉:配件少数据线",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user198@example.com",
+          "content": "您的 ITEM_1001 投诉工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "所购商品 ITEM_1001（蓝牙音箱）缺少一根数据线配件",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user198@example.com",
+          "content": "您好，关于您反映的所购商品 ITEM_1001（蓝牙音箱）缺少数据线配件的问题，我们已为您创建MEDIUM优先级的客服工单，相关团队将尽快为您核实处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_004_V11",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_1001 智能手表库存咨询",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user521@example.com",
+          "content": "您的 ITEM_1001 库存咨询工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "READ"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "用户询问商品 ITEM_1001（智能手表）是否仍有库存可以发出",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user521@example.com",
+          "content": "您好，关于您咨询的商品 ITEM_1001（智能手表）库存情况，我们已为您创建咨询工单并核实库存信息。感谢您的咨询，如有其他问题请随时联系我们。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_004_V13",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_2002 智能手表库存咨询",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user521@example.com",
+          "content": "您的 ITEM_2002 库存咨询工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Query_DB",
+        "args": {
+          "table": "orders",
+          "conditions": {
+            "user_id": "USR_777",
+            "item_id": "ITEM_2002"
+          }
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "关于ITEM_2002（智能手表）库存及发货状态的询问",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user521@example.com",
+          "content": "您好，关于您咨询的ITEM_2002（智能手表）库存及发货状态问题，我们已为您创建工单（优先级：LOW）并正在核实处理，请您耐心等待后续回复。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_005_V05",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_1001 婴儿推车缺货登记通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您的 ITEM_1001 缺货登记已收到,到货后会另行通知"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "WRITE"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "登记婴儿推车(ITEM_1001)缺货通知，补货后需通知用户",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您好，您登记的婴儿推车(ITEM_1001)缺货通知已受理。目前该商品处于缺货状态，补货后我们会第一时间通知您，感谢您的耐心等待。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_005_V06",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_215"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_9999"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_215",
+          "issue": "ITEM_9999 婴儿推车缺货登记通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您的 ITEM_9999 缺货登记已收到,到货后会另行通知"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_215",
+          "action": "WRITE"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_9999"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_215",
+          "issue": "用户 USR_215 要求为 ITEM_9999（婴儿推车）登记缺货提醒，补货后需通知用户",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您好，您关于 ITEM_9999（婴儿推车）的缺货提醒已登记成功。商品补货后我们会第一时间联系您，感谢您的耐心等待。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_005_V07",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "ITEM_2002 婴儿推车缺货登记通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您的 ITEM_2002 缺货登记已收到,到货后会另行通知"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "READ"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "ITEM_2002（婴儿推车）缺货登记，用户希望到货后收到通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您好，您登记的婴儿推车（ITEM_2002）缺货通知已受理。到货后我们会第一时间与您取得联系，感谢您的耐心等待。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_005_V09",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 63.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_9999"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_9999 婴儿推车缺货登记通知",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您的 ITEM_9999 缺货登记已收到,到货后会另行通知"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "WRITE"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_9999"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "用户 USR_777 请求为 ITEM_9999（婴儿推车）登记缺货提醒，补货后需通知用户",
+          "priority": "LOW"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "user633@example.com",
+          "content": "您好，您关注的婴儿推车（ITEM_9999）目前处于缺货状态，我们已为您登记缺货提醒。补货后我们会第一时间联系您，感谢您的耐心等待。"
+        }
+      },
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "STOCK_OUT_REMINDER",
+          "details": {
+            "user_id": "USR_777",
+            "item_id": "ITEM_9999",
+            "item_name": "婴儿推车",
+            "priority": "LOW",
+            "action": "缺货提醒已登记，已通知 user633@example.com"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_006_V02",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_5005 奶粉物流催查:超 7 天未到货",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613922223333",
+          "content": "您的 ITEM_5005 物流催查工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "已订购商品 ITEM_5005（奶粉）在超过 7 天后仍未送达，需进行物流催查",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613922223333",
+          "content": "您好，关于您反映的商品 ITEM_5005（奶粉）超7天未送达的问题，我们已为您创建高优先级工单并安排物流催查，请您耐心等待。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_006_V10",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "normal",
+    "total_score": 68.33,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 58.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_2002 奶粉物流催查:超 7 天未到货",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613922223333",
+          "content": "您的 ITEM_2002 物流催查工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Query_DB",
+        "args": {
+          "table": "orders",
+          "conditions": {
+            "user_id": "USR_001",
+            "item_id": "ITEM_2002"
+          }
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "投诉ITEM_2002（奶粉）已过7天仍未送达，要求核查物流进度",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613922223333",
+          "content": "您好，关于您反馈ITEM_2002（奶粉）超7天未送达的问题，我们已为您创建HIGH优先级工单，正在紧急核查物流进度，请您耐心等待后续通知。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_009_V06",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "boundary",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_2002 耳机损坏退换",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613555556666",
+          "content": "您的 ITEM_2002 损坏工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "订单里的ITEM_2002（耳机）存在损坏情况",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613555556666",
+          "content": "您好，您反馈的耳机损坏问题工单已创建，我们将尽快为您处理，请留意后续进展。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_009_V08",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "boundary",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_2002"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "ITEM_2002 耳机损坏退换",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613555556666",
+          "content": "您的 ITEM_2002 损坏工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "订单里的 ITEM_2002（耳机）出现了损坏情况",
+          "priority": "MEDIUM"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613555556666",
+          "content": "您好，关于您反馈的耳机损坏问题，我们已为您创建工单，处理结果出来后将第一时间通知您。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V01",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "ITEM_5005 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_5005 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "收到的库存商品 ITEM_5005 存在破损问题，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好，关于您反馈的库存商品 ITEM_5005 破损问题，我们已为您创建 HIGH 优先级的损坏退换工单，客服将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V03",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "ITEM_1001 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_1001 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "收到的 ITEM_1001 商品已经损坏，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好，您反馈的 ITEM_1001 商品损坏退换工单已成功创建，我们将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V04",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_1001 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_1001 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "商品 ITEM_1001 到货即损，申请损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好张伟，您上报的商品 ITEM_1001 到货即损的退换工单已成功创建，优先级为HIGH，我们将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V05",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "ITEM_5005 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_5005 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_042",
+          "issue": "用户反馈收到的库存商品 ITEM_5005 存在损坏情况，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好，关于您反馈的商品 ITEM_5005 损坏问题，我们已为您创建 HIGH 优先级的损坏退换工单，后续将有专人联系您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V09",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "ITEM_5005 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_5005 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_001",
+          "issue": "用户反馈收到的库存商品 ITEM_5005 已经损坏，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好，您反馈的商品 ITEM_5005 损坏退换工单已创建，我们将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V13",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_1001"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "ITEM_1001 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_1001 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_103",
+          "issue": "收到的商品 ITEM_1001 存在损坏问题，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好张伟，您的商品 ITEM_1001 损坏退换工单已成功创建（优先级：HIGH），我们将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_CTH_010_V14",
+    "skill_name": "CustomerTicketHandling",
+    "difficulty": "adversarial",
+    "total_score": 53.33,
+    "tool_recall": 66.67,
+    "tool_order": 66.67,
+    "argument_accuracy": 33.33,
+    "expected": [
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Check_Inventory",
+        "args": {
+          "item_id": "ITEM_5005"
+        }
+      },
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "ITEM_5005 损坏退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您的 ITEM_5005 损坏退换工单已建立"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Create_Ticket",
+        "args": {
+          "user_id": "USR_777",
+          "issue": "收到的库存商品ITEM_5005在到货时已损坏，申请退换",
+          "priority": "HIGH"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Email",
+          "receiver": "zhangwei@example.com",
+          "content": "您好，您反馈的ITEM_5005到货损坏退换工单已成功创建，我们将尽快为您处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_001_V10",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "normal",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.20",
+            "cpu": "95%",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.20",
+          "command": "top -bn1 | head -20"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613611112222",
+          "content": "10.0.0.20 CPU 告警处置完成,进程查看结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "source_ip": "10.0.0.20",
+            "cpu_usage": "95%",
+            "alert_description": "CPU usage sustained at 95%",
+            "assigned_operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.20",
+          "command": "top -bn1 | head -20"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613611112222",
+          "content": "【CPU告警处置】服务器 10.0.0.20 CPU持续95%，已执行 top -bn1 | head -20 采集进程信息，请查收处置结果并跟进排查。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_005_V16",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "normal",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "db_lock_wait",
+          "details": {
+            "server": "10.0.0.20",
+            "db": "MySQL",
+            "operator": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_215"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.20",
+          "command": "mysqladmin -u root processlist"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Slack",
+          "receiver": "#db-ops",
+          "content": "10.0.0.20 MySQL 锁等待排查完成,processlist 已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "MYSQL_LOCK_WAIT",
+          "details": {
+            "target_ip": "10.0.0.20",
+            "issue": "MySQL long lock wait detected",
+            "assignee": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_215",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.20",
+          "command": "mysqladmin -u root processlist"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "Slack",
+          "receiver": "#db-ops",
+          "content": "Alert: MySQL long lock wait detected on 10.0.0.20. Operator USR_215 has executed 'mysqladmin -u root processlist' to investigate the current connections. Please monitor the situation."
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_007_V19",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "boundary",
+    "total_score": 0.0,
+    "tool_recall": 0.0,
+    "tool_order": 0.0,
+    "argument_accuracy": 0.0,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "traffic_anomaly",
+          "details": {
+            "server": "192.168.1.1",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "iftop -P -n -t -s 5"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613633334444",
+          "content": "192.168.1.1 出口流量异常排查完成,iftop 结果已附"
+        }
+      }
+    ],
+    "predicted": []
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V00",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.5",
+            "cpu": "99%",
+            "operator": "USR_001"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.5 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.5",
+            "cpu_usage": "99%",
+            "reporter": "USR_001",
+            "status": "investigating"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【异常告警处置通知】服务器 10.0.0.5 CPU 使用率达 99%，已执行 top -bn1 | head -30 查看进程详情，请登录运维平台查看完整排查结果。处置人：USR_001"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V01",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "cpu": "99%",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "172.16.0.10 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "172.16.0.10",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring",
+            "reported_by": "USR_777",
+            "description": "服务器 CPU 使用率已达 99%，出现异常"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警通知】服务器 172.16.0.10 CPU 使用率达 99%，top 进程信息已采集，请立即排查处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V02",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.5",
+            "cpu": "99%",
+            "operator": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.5 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.5",
+            "cpu_usage": "99%",
+            "reported_by": "USR_103",
+            "description": "服务器 10.0.0.5 CPU 使用率达到 99%，触发异常告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 10.0.0.5 CPU 99%，top 进程快照已通过 SSH 获取，请登录运维平台查看完整结果并跟进处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V03",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.5",
+            "cpu": "99%",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.5 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "target_ip": "10.0.0.5",
+            "cpu_usage": "99%",
+            "reported_by": "USR_777",
+            "description": "CPU usage spiked to 99% on 10.0.0.5, alert recorded on external monitoring platform"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】IP 10.0.0.5 CPU使用率飙升至99%，已登录服务器执行 top -bn1 | head -30 查看进程，请关注后续处置进展。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V04",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "192.168.1.1",
+            "cpu": "99%",
+            "operator": "USR_001"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "192.168.1.1 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "192.168.1.1",
+            "cpu_usage": "99%",
+            "reported_by": "USR_001",
+            "description": "服务器 CPU 负载已达 99%，出现异常告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 192.168.1.1 CPU 负载 99%，已执行 top -bn1 | head -30 查看进程情况，请登录内部监控系统查看详细输出结果，请尽快排查高 CPU 占用进程。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V05",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "192.168.1.1",
+            "cpu": "99%",
+            "operator": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "192.168.1.1 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "192.168.1.1",
+            "cpu_usage": "99%",
+            "operator": "USR_042",
+            "description": "服务器 192.168.1.1 CPU 使用率已达 99%，触发告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_042",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 192.168.1.1 CPU 使用率 99%，已执行 top -bn1 | head -30 查看进程状态，请登录运维平台查看详细输出结果。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V06",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "192.168.1.1",
+            "cpu": "99%",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "192.168.1.1 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "192.168.1.1",
+            "cpu_usage": "99%",
+            "reported_by": "USR_777",
+            "status": "investigating"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【CPU异常告警】服务器 192.168.1.1 CPU使用率高达99%，已通过SSH执行 top -bn1 | head -30 获取进程详情，请查收输出结果并尽快排查处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V07",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "192.168.1.1",
+            "cpu": "99%",
+            "operator": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "192.168.1.1 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "192.168.1.1",
+            "cpu_usage": "99%",
+            "reported_by": "USR_103",
+            "description": "服务器CPU占用率达99%，需紧急排查"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器192.168.1.1 CPU占用率99%，已通过SSH执行top -bn1 | head -30查看进程详情，请登录监控平台查看完整输出结果。告警已由USR_103登记，正在紧急处理中。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V08",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.5",
+            "cpu": "99%",
+            "operator": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.5 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.5",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring",
+            "recorded_by": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_042",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.5",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "服务器 10.0.0.5 CPU 使用率异常（99%），已通过 top 命令采集进程信息，请查收处置结果。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V09",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.99",
+            "cpu": "99%",
+            "operator": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.99 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "target_ip": "10.0.0.99",
+            "cpu_usage": "99%",
+            "reported_by": "USR_103",
+            "description": "服务器 CPU 占用飙升至 99%，已触发告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 10.0.0.99 CPU 占用 99%，已通过 SSH 执行 top -bn1 | head -30 获取进程详情，请查收处置结果并及时跟进高占用进程。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V10",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "cpu": "99%",
+            "operator": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_103"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "172.16.0.10 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "172.16.0.10",
+            "alert_description": "CPU 99%",
+            "reported_by": "USR_103"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_103",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "服务器172.16.0.10 CPU告警排查结果（top -bn1 | head -30）：[此处为命令执行输出结果]"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V11",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "cpu": "99%",
+            "operator": "USR_001"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "172.16.0.10 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "172.16.0.10",
+            "cpu_usage": "99%",
+            "reporter": "USR_001",
+            "description": "CPU使用率飙升至99%，需紧急排查进程情况"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【紧急告警】服务器172.16.0.10 CPU使用率飙升至99%，已通过SSH执行top -bn1 | head -30获取进程快照，请查看监控平台详细输出并及时处置。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V12",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "cpu": "99%",
+            "operator": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "172.16.0.10 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "172.16.0.10",
+            "cpu_usage": "99%",
+            "operator": "USR_042",
+            "description": "服务器CPU占用率达99%，需紧急排查"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_042",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】IP 172.16.0.10 服务器CPU占用率99%，已执行 top -bn1 | head -30 查看进程，请查收执行结果并跟进处理。操作人：USR_042"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V13",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.99",
+            "cpu": "99%",
+            "operator": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_042"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.99 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.99",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring",
+            "reported_by": "USR_042"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_042",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警通知】服务器 10.0.0.99 CPU 使用率达 99%，已通过 SSH 执行 top -bn1 | head -30 查看进程状态，请登录监控系统查看详细输出结果，请尽快排查处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V14",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.99",
+            "cpu": "99%",
+            "operator": "USR_777"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_777"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.99 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.99",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring",
+            "operator": "USR_777",
+            "description": "服务器 10.0.0.99 CPU 使用率达到 99%，触发异常告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_777",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 10.0.0.99 CPU 99% 异常，top 进程快照已获取，请登录运维平台查看详细执行结果。操作人：USR_777"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V16",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "172.16.0.10",
+            "cpu": "99%",
+            "operator": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_215"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "172.16.0.10 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "172.16.0.10",
+            "cpu_usage": "99%",
+            "reported_by": "USR_215",
+            "description": "服务器 172.16.0.10 CPU 使用率达 99%，需紧急排查"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_215",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "172.16.0.10",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 172.16.0.10 CPU 使用率 99%，已通过 SSH 执行 top -bn1 | head -30 检查进程，请登录运维平台查看详细输出结果并跟进处置。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V17",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "192.168.1.1",
+            "cpu": "99%",
+            "operator": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_215"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "192.168.1.1 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "192.168.1.1",
+            "cpu_usage": "99%",
+            "reported_by": "USR_215",
+            "description": "服务器CPU使用率飙升至99%，触发告警"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_215",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "192.168.1.1",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 192.168.1.1 CPU使用率飙升至99%，已执行 top -bn1 | head -30 查看进程信息，请登录运维平台查看完整执行结果并及时处理。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V18",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.99",
+            "cpu": "99%",
+            "operator": "USR_001"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_001"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.99 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.99",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring_platform",
+            "reported_by": "USR_001",
+            "description": "服务器 10.0.0.99 的 CPU 使用率飙升至 99%，需立即排查高占用进程"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_001",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器 10.0.0.99 CPU 使用率飙升至 99%，已通过 SSH 执行 top -bn1 | head -30 查看当前进程，请登录运维平台查看完整执行结果并跟进处置。"
+        }
+      }
+    ]
+  },
+  {
+    "agent": "qwen",
+    "task_id": "T_IAR_010_V19",
+    "skill_name": "IncidentAlertResponse",
+    "difficulty": "adversarial",
+    "total_score": 61.67,
+    "tool_recall": 75.0,
+    "tool_order": 75.0,
+    "argument_accuracy": 41.67,
+    "expected": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "cpu_alert",
+          "details": {
+            "server": "10.0.0.99",
+            "cpu": "99%",
+            "operator": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Fetch_User_Data",
+        "args": {
+          "user_id": "USR_215"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "10.0.0.99 CPU 99% 告警处置完成,进程结果已附"
+        }
+      }
+    ],
+    "predicted": [
+      {
+        "tool": "Log_Event",
+        "args": {
+          "event_type": "CPU_HIGH",
+          "details": {
+            "server_ip": "10.0.0.99",
+            "cpu_usage": "99%",
+            "alert_source": "external_monitoring",
+            "reported_by": "USR_215"
+          }
+        }
+      },
+      {
+        "tool": "Verify_Permission",
+        "args": {
+          "user_id": "USR_215",
+          "action": "ADMIN"
+        }
+      },
+      {
+        "tool": "Execute_CMD",
+        "args": {
+          "target_ip": "10.0.0.99",
+          "command": "top -bn1 | head -30"
+        }
+      },
+      {
+        "tool": "Send_Notification",
+        "args": {
+          "channel": "SMS",
+          "receiver": "+8613900139000",
+          "content": "【告警处置】服务器10.0.0.99 CPU占用率99%，已登录执行 top -bn1 | head -30 查看进程状态，请查收执行结果并及时处理异常进程。操作人：USR_215"
+        }
+      }
+    ]
+  }
+]

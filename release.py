@@ -1,11 +1,15 @@
 """v1.0 发布脚本（PLAN.md D6 收尾）
+把 v0.95 候选集 + 人工审核意见 → 加工成 v1.0 正式版 benchmark
 
 逻辑：
-1. 加载 v0.95 候选 + 人工抽检日志
-2. 应用决策：reject → 剔除；modify → 保留但打 tag；accept/skip → 保留
-3. 二次 schema 校验确保版本干净
-4. 写入 data/version_history/benchmark_v1.0.0.json
-5. 同步更新 CHANGELOG.md
+[1/4] 加载数据，v0.95 候选 + 人工抽检日志
+   ↓
+[2/4] 应用人工审核决策（剔除/打标）
+   ↓
+[3/4] Schema 校验（确保格式正确）
+   ↓
+[4/4] 写入版本文件data/version_history/benchmark_v1.0.0.json + 更新 CHANGELOG
+
 
 CLI：
     python -m release

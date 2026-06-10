@@ -1,0 +1,271 @@
+# 衰退检测与演进报告 — v1.0.0 → v1.1.0-real
+
+- 生成时间：2026-06-10 17:34:50
+- 衰退 task 数：244
+
+## 1. 演进策略分布
+
+| 策略 | 数量 |
+|---|---|
+| `adversarial_escalation` | 244 |
+
+## 2. before / after 均分对照
+
+| task_id | strategy | doubao↓ | Δ均分 |
+|---|---|---|---|
+| `T_SAE_001_V00` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_001_V01` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_001_V02` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V03` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_001_V04` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V05` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V06` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_001_V07` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_001_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V09` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_001_V10` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V11` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_001_V13` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V14` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V15` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V16` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V17` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V18` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_001_V19` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_002_V00` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V01` | adversarial_escalation | 89→43 | -45.56 |
+| `T_SAE_002_V02` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V04` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V05` | adversarial_escalation | 89→43 | -45.56 |
+| `T_SAE_002_V06` | adversarial_escalation | 89→43 | -45.56 |
+| `T_SAE_002_V07` | adversarial_escalation | 89→43 | -45.56 |
+| `T_SAE_002_V08` | adversarial_escalation | 89→43 | -45.56 |
+| `T_SAE_002_V09` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V10` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V11` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V13` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_002_V17` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_003_V00` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_003_V01` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_003_V02` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_003_V03` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_003_V05` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_003_V06` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_003_V08` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_003_V09` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_003_V10` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_003_V11` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_003_V12` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_003_V13` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_003_V14` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_003_V15` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_003_V16` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_003_V17` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_003_V19` | adversarial_escalation | 89→70 | -18.67 |
+| `T_SAE_004_V00` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V02` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_004_V03` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V04` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_004_V05` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V06` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V07` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V09` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_004_V10` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V11` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V12` | adversarial_escalation | 91→43 | -47.78 |
+| `T_SAE_004_V13` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V14` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V15` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V16` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V17` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_004_V18` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_004_V19` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_005_V00` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V02` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V03` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V04` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_005_V05` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V06` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V07` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_005_V08` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_005_V09` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V10` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_005_V11` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_005_V12` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_005_V13` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V14` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_005_V16` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_005_V17` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_005_V18` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_005_V19` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V00` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V02` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_006_V03` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V04` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V05` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_006_V06` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V07` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_006_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V09` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_006_V10` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V11` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V12` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V13` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_006_V14` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V15` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V16` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_006_V17` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V18` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_006_V19` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_007_V00` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_007_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_007_V02` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V03` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_007_V04` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V06` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V07` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_007_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_007_V09` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_007_V10` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V12` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V13` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_007_V14` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_007_V15` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V16` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_007_V17` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_007_V18` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_007_V19` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_008_V00` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_008_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V02` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V03` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_008_V04` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V05` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V06` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_008_V07` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_008_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V09` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_008_V11` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_008_V12` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_008_V13` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_008_V14` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_008_V16` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_008_V18` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_008_V19` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V00` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V02` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V03` | adversarial_escalation | 96→43 | -52.23 |
+| `T_SAE_009_V04` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V05` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_009_V06` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V07` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_009_V08` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V09` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V10` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V11` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_009_V12` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V13` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V14` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V15` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_009_V16` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V17` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V18` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_009_V19` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V00` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V01` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_010_V02` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V04` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V05` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V06` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V07` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V09` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_010_V10` | adversarial_escalation | 89→37 | -52.22 |
+| `T_SAE_010_V11` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V12` | adversarial_escalation | 87→64 | -23.42 |
+| `T_SAE_010_V13` | adversarial_escalation | 96→70 | -25.34 |
+| `T_SAE_010_V16` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V17` | adversarial_escalation | 87→70 | -16.76 |
+| `T_SAE_010_V18` | adversarial_escalation | 87→43 | -43.65 |
+| `T_SAE_010_V19` | adversarial_escalation | 96→70 | -25.34 |
+| `T_CTH_001_V01` | adversarial_escalation | 93→31 | -62.66 |
+| `T_CTH_001_V02` | adversarial_escalation | 93→57 | -36.66 |
+| `T_CTH_001_V03` | adversarial_escalation | 87→53 | -33.34 |
+| `T_CTH_001_V05` | adversarial_escalation | 93→53 | -40.00 |
+| `T_CTH_001_V06` | adversarial_escalation | 93→53 | -40.00 |
+| `T_CTH_001_V12` | adversarial_escalation | 93→31 | -62.66 |
+| `T_CTH_002_V06` | adversarial_escalation | 93→57 | -36.66 |
+| `T_CTH_002_V14` | adversarial_escalation | 93→57 | -36.66 |
+| `T_CTH_003_V05` | adversarial_escalation | 87→53 | -33.34 |
+| `T_CTH_005_V07` | adversarial_escalation | 86→75 | -11.07 |
+| `T_CTH_005_V10` | adversarial_escalation | 93→57 | -36.66 |
+| `T_CTH_007_V00` | adversarial_escalation | 87→53 | -33.34 |
+| `T_CTH_008_V00` | adversarial_escalation | 87→75 | -11.91 |
+| `T_CTH_008_V05` | adversarial_escalation | 87→57 | -30.00 |
+| `T_CTH_008_V10` | adversarial_escalation | 87→75 | -11.91 |
+| `T_CTH_010_V00` | adversarial_escalation | 93→53 | -40.00 |
+| `T_CTH_010_V07` | adversarial_escalation | 87→53 | -33.34 |
+| `T_CTH_010_V14` | adversarial_escalation | 93→31 | -62.66 |
+| `T_DEM_001_V00` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_001_V01` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_001_V02` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_001_V03` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_001_V04` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_002_V00` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_002_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_002_V02` | adversarial_escalation | 92→66 | -25.24 |
+| `T_DEM_002_V03` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_002_V04` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_003_V00` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_003_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_003_V02` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_003_V03` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_003_V04` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_004_V00` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_004_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_004_V02` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_004_V03` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_004_V04` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_005_V00` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_005_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_005_V02` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_005_V03` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_005_V04` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_006_V00` | adversarial_escalation | 85→73 | -11.90 |
+| `T_DEM_006_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_006_V02` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_006_V03` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_007_V00` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_007_V01` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_007_V02` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_007_V03` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_008_V00` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_008_V02` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_008_V03` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_008_V04` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_009_V00` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_009_V01` | adversarial_escalation | 92→73 | -18.57 |
+| `T_DEM_009_V02` | adversarial_escalation | 92→0 | -91.67 |
+| `T_DEM_009_V03` | adversarial_escalation | 87→68 | -18.57 |
+| `T_DEM_009_V04` | adversarial_escalation | 87→68 | -18.57 |
+| `T_IAR_004_V03` | adversarial_escalation | 87→87 | +0.00 |
+| `T_IAR_004_V16` | adversarial_escalation | 87→87 | +0.00 |
+| `T_IAR_006_V09` | adversarial_escalation | 87→87 | +0.00 |
+| `T_IAR_006_V19` | adversarial_escalation | 87→87 | +0.00 |
+| `T_IAR_009_V16` | adversarial_escalation | 87→87 | +0.00 |
+
+## 3. 总览
+
+- 衰退 task 在 v1.0.0 上的平均分：91.23
+- 衰退 task 在 v1.1.0-real 上的平均分：63.64
+- 平均下降幅度：-27.58
+
+## 4. 按策略平均下降
+
+| 策略 | 样本数 | 平均 Δ均分 |
+|---|---|---|
+| `adversarial_escalation` | 244 | -27.58 |

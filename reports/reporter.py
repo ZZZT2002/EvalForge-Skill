@@ -1,5 +1,7 @@
 """通用 Markdown 报告生成器
 
+把各种数据（质检结果、评测分数、衰退对比）格式化成带表格、直方图、统计摘要的报告。
+
 D5：generate_quality_report —— v0.9 → v0.95 的质检结果总结
 D8、D9 会在后续添加 evaluation / decay 报告生成函数
 """

@@ -1,11 +1,7 @@
 """embedding 相似度去重
 
-D3 决定：因 torch DLL 在本机不可用，先用 sklearn TF-IDF + cosine。
-设计上预留 Embedder 接口，未来 torch 修好后插入 TransformerEmbedder。
-
-D5 答辩话术：
-- "TF-IDF 在 lexical 层面已经能抓近似 paraphrase 重复"
-- "架构上 Embedder 是 pluggable 的，MiniLM 是已规划的下一步"
+Prompt 去重工具，用于从大量候选 Prompt 中剔除语义相似的重复内容，保证测试集的多样性。
+用 TF-IDF + 余弦相似度，找出并删除语义重复的 Prompt，只保留不相似的版本。
 """
 from typing import List, Protocol
 

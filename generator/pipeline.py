@@ -1,5 +1,5 @@
 """D3 主流水线：seeds → matrix_expander → llm_paraphraser → dedup → v0.9
-
+候选集生成流水线，负责把少量种子数据（seeds）扩展成大规模候选集（v0.9）
 可独立运行：
     python -m generator.pipeline
 

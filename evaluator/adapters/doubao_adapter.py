@@ -1,14 +1,15 @@
-"""DeepSeek Adapter（PROJECT.md §8.1）
+"""Doubao Adapter（豆包 / 字节豆包，Volcengine ARK OpenAI 兼容模式）
 
-JSON-plan 模式（D14）：不走逐步 function-calling，而是让模型在 message.content 里
-一次性输出"完整工具调用序列"的 JSON（见 base.OUTPUT_CONTRACT），交由 normalizer 解析。
-原因：真实模型在 function-calling 下单轮只发第一步就停，拿不到完整计划；改成一次性
-JSON 规划后才能吐全序列，单轮评测才有意义。
-失败重试 MAX_RETRIES 次，仍失败返回 "[]"（→ 判 0 分，不中断流水线）。
+走火山方舟 ARK 的 OpenAI 兼容接口，复用 openai SDK，
+与 DeepSeekAdapter / QwenAdapter 同一个套路。
+
+需要在 .env 里设：
+  DOUBAO_API_KEY=ark-xxxxx         # 火山方舟控制台拿
+  DOUBAO_BASE_URL=https://ark.cn-beijing.volces.com/api/v3   # 可选，默认值
 """
 import os
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -20,19 +21,22 @@ from models import SkillDefinition
 load_dotenv()
 
 
-class DeepSeekAdapter(BaseAdapter):
-    name = "deepseek"
+class DoubaoAdapter(BaseAdapter):
+    name = "doubao"
 
-    def __init__(self, model: str = "deepseek-chat"):
+    def __init__(self, model: str = "doubao-seed-2-0-mini-260428"):
         self.model = model
         self._client: Optional[OpenAI] = None
 
     def _ensure_client(self) -> OpenAI:
         if self._client is None:
-            api_key = os.getenv("DEEPSEEK_API_KEY", "")
+            api_key = os.getenv("DOUBAO_API_KEY", "")
             if not api_key:
-                raise RuntimeError("DEEPSEEK_API_KEY not set")
-            base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+                raise RuntimeError("DOUBAO_API_KEY not set")
+            base_url = os.getenv(
+                "DOUBAO_BASE_URL",
+                "https://ark.cn-beijing.volces.com/api/v3",
+            )
             self._client = OpenAI(api_key=api_key, base_url=base_url)
         return self._client
 
@@ -58,9 +62,9 @@ class DeepSeekAdapter(BaseAdapter):
                     timeout=30.0,
                 )
                 return resp.choices[0].message.content or "[]"
-            except Exception as e:  # 网络 / 限流 / 超时
+            except Exception as e:
                 last_err = e
                 if attempt < MAX_RETRIES - 1:
                     time.sleep(RETRY_DELAY * (attempt + 1))
-        print(f"[DeepSeekAdapter] 调用失败，已重试 {MAX_RETRIES} 次: {last_err}")
+        print(f"[DoubaoAdapter] 调用失败，已重试 {MAX_RETRIES} 次: {last_err}")
         return "[]"

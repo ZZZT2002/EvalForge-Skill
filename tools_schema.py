@@ -1,4 +1,4 @@
-"""9 个原子工具的 JSON Schema（PROJECT.md §3.2）"""
+"""定义9个工具中每个工具的参数格式、类型、必填字段、约束条件，用于验证和生成模型调用。"""
 
 TOOLS_SCHEMA = {
     "Verify_Permission": {
@@ -59,7 +59,7 @@ TOOLS_SCHEMA = {
     "Send_Notification": {
         "type": "object",
         "properties": {
-            "channel": {"type": "string", "enum": ["Email", "Slack", "SMS"]},
+            "channel": {"type": "string", "enum": ["Email", "Slack", "SMS", "Audit"]},
             "receiver": {"type": "string"},
             "content": {"type": "string"},
         },

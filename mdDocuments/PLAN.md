@@ -139,7 +139,7 @@
 ### D9 — 5/31（周日）
 > **目标：衰退检测 + 约束演进**
 - [ ] `updater/decay_detector.py`：找出平均分 >92 的衰退 task
-- [ ] `updater/constraint_evolver.py`：三种演进策略（前置工具注入 / 约束加强 / 对抗诱导升级）
+- [ ] `updater/constraint_evolver.py`：演进策略（v1.1 baseline 激活 `constraint_tighten`；`precondition_injection` / `adversarial_escalation` 作为 `_FUTURE_STRATEGIES` 占位，启用前需先升级 Skill 本体 `allowed_tools`）
 - [ ] 生成 v1.1.0，写入 `version_history` + `CHANGELOG.md`
 - [ ] **跑 before/after 对照实验**：v1.0 衰退 task vs v1.1 演进版本，相同 Agent 跑两次
 - [ ] 生成 `data/reports/decay_report_v1.1.0.md`
@@ -239,7 +239,7 @@
 - [x] **D6** human_console 抽检（119/119 accept，100% 通过率）+ `benchmark_v1.0.0.json` 发布
 - [x] **D7** evaluator/adapters + normalizer + scorer + 10 个判分单测
 - [x] **D8** `evaluator/pipeline.py` 两 Agent MOCK 评测 + `evaluation_v1.0.0.md` + 73 条 badcase
-- [x] **D9** decay_detector（404 task）+ constraint_evolver（三策略）+ `benchmark_v1.1.0.json` + `decay_report_v1.1.0.md`（before/after Δ均分 = -14.48）
+- [x] **D9** decay_detector（384 task）+ constraint_evolver（v1.1 baseline = constraint_tighten 单策略，与 Skill 本体 `allowed_tools` 自洽；预留两种策略 → v1.2）+ `benchmark_v1.1.0.json` + `decay_report_v1.1.0.md`（before/after Δ均分 = **-12.39**）
 - [x] **D10** feedback_injector（auto + interactive）+ 8 条 from_badcase 种子注入，膨胀后 120 个变体带 tag；`python main.py` 端到端零报错
 - [x] **D11** 演讲稿 SPEECH_REVIEW3.md 真实数字对齐 + 130 单测全绿 + main.py 端到端零报错
 - [x] **D12** 代码整理 + README 项目自述 + 12 页 SLIDES.md 答辩大纲

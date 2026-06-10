@@ -11,6 +11,7 @@ MOCK 模式：build_simulated_responses 按 error_rate 制造扰动答案，
 """
 import json
 import random
+import time
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -25,6 +26,7 @@ from evaluator.adapters.base import BaseAdapter, MockAdapter
 from evaluator.normalizer import normalize_response
 from evaluator.scorer import score_breakdown
 from reports.reporter import generate_evaluation_report
+from skills_ontology import SKILLS
 from tools_schema import TOOLS_SCHEMA
 
 
@@ -72,19 +74,23 @@ def evaluate(
     """逐条 call → normalize → score，返回 records。"""
     schema = tools_schema if tools_schema is not None else TOOLS_SCHEMA
     records: List[dict] = []
-    for tc in benchmark:
+    total = len(benchmark)
+    t_start = time.time()
+    for i, tc in enumerate(benchmark, 1):
+        skill_name = tc.get("skill_name") or tc.get("skill_definition", {}).get("skill_name")
+        skill_def = SKILLS.get(skill_name) if skill_name else None
         raw = adapter.call(
             prompt=tc["prompt"],
             tools_schema=schema,
             task_id=tc["task_id"],
+            skill_definition=skill_def,
         )
         predicted = normalize_response(raw)
         score = score_breakdown(predicted, tc["expected_tool_calls"])
         records.append(
             {
                 "task_id": tc["task_id"],
-                "skill_name": tc.get("skill_name")
-                or tc.get("skill_definition", {}).get("skill_name"),
+                "skill_name": skill_name,
                 "difficulty": tc["difficulty"],
                 "expected": tc["expected_tool_calls"],
                 "predicted": predicted,
@@ -92,6 +98,13 @@ def evaluate(
                 "score": score,
             }
         )
+        # 每 20 条或最后一条打印进度
+        if i % 20 == 0 or i == total:
+            elapsed = time.time() - t_start
+            eta = (elapsed / i) * (total - i) if i < total else 0
+            avg_score = sum(r["score"]["total"] for r in records) / len(records)
+            print(f"  [{adapter.name}] {i}/{total} ({(i/total)*100:.0f}%) "
+                  f"均分={avg_score:.1f} 耗时={elapsed:.0f}s 预计剩余={eta:.0f}s")
     return records
 
 
@@ -133,6 +146,9 @@ def _build_adapter(agent: str, benchmark: List[dict], error_rate: float) -> Base
         if agent == "openai":
             from evaluator.adapters.openai_adapter import OpenAIAdapter
             return OpenAIAdapter()
+        if agent == "doubao":
+            from evaluator.adapters.doubao_adapter import DoubaoAdapter
+            return DoubaoAdapter()
         raise ValueError(f"REAL 模式下未实现的 agent: {agent}")
     # MOCK 模式：用预设响应表
     responses = build_simulated_responses(

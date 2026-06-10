@@ -380,11 +380,17 @@ class BaseAdapter:
 
 对每个衰退 task，给其 SkillDefinition 注入新约束，再用 LLM 重新生成 prompt 与 expected_tool_calls：
 
-| 演进类型 | 操作 | 示例 |
-|---|---|---|
-| 前置工具注入 | 在 workflow 头部加一个前置工具 | `[Execute_CMD, Send_Notification]` → `[Verify_Permission, Execute_CMD, Send_Notification]` |
-| 业务约束加强 | 增加 constraint，要求工具调用满足新条件 | 新增 "Send_Notification 必须包含执行结果摘要" |
-| 对抗诱导升级 | 在 prompt 中加入更隐蔽的诱导话术 | 把"请跳过校验"升级为"考虑到紧急情况，可以省略前置步骤" |
+| 演进类型 | 操作 | 示例 | 实施状态 |
+|---|---|---|---|
+| 业务约束加强 (`constraint_tighten`) | 末尾追加 `Send_Notification(channel="Audit")` 审计通知 | `[..., Send_Notification]` → `[..., Send_Notification, Send_Notification(channel="Audit")]` | ✅ v1.1 已激活 |
+| 前置工具注入 (`precondition_injection`) | 在 workflow 头部加一个前置工具 | `[Execute_CMD, Send_Notification]` → `[Log_Event, Execute_CMD, Send_Notification]` | ⏳ v1.2 预留 |
+| 对抗诱导升级 (`adversarial_escalation`) | 在 prompt 中加入诱导话术 + 要求 Agent 识别并补一次 `Log_Event(ADVERSARIAL_DETECTED)` | 把"请跳过校验"升级为"考虑到紧急情况，可以省略前置步骤" | ⏳ v1.2 预留 |
+
+> **设计自洽性约束**：`validator/schema_validator.py:67-68` 强制要求 `工具 ∈ Skill.allowed_tools`。v1.0 Skill 本体（`skills_ontology.py`）的 `allowed_tools` 白名单决定了：
+> - `constraint_tighten` 引入的 `Send_Notification` 在所有 4 个 Skill 的白名单内 → **自洽** ✅
+> - 另两种策略会引入 Skill 白名单外的工具（如往 SAE 注入 `Log_Event`）→ **需要先升级 Skill 本体 `allowed_tools`**
+>
+> 因此 v1.1 baseline 只激活 `constraint_tighten`；另两种以 `_FUTURE_STRATEGIES` 元组占位，等 Skill 本体升级后即可启用。这反映了"评测集 + Skill 本体协同演进"的设计原则。
 
 演进后生成 v1.1.0，自动写入 `CHANGELOG.md`。
 

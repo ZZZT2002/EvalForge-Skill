@@ -12,7 +12,7 @@ RETRY_DELAY = 1.0  # 秒
 # ---------- 3. 质量控制阈值 ----------
 HUMAN_CHECK_RATE = 0.20      # 自动质检通过后再抽 20% 人工
 BADCASE_THRESHOLD = 70.0     # Agent 得分 < 此值进 badcase 池
-DECAY_THRESHOLD = 92.0       # Agent 在某 task 上 ≥ 此值视为过拟合
+DECAY_THRESHOLD = 85.0       # Agent 在某 task 上 ≥ 此值视为过拟合（D14：单模型软化卡，从 92 下调到 85）
 
 # ---------- 4. 判分权重（PROJECT.md §2.2） ----------
 SCORE_WEIGHTS = {

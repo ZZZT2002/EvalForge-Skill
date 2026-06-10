@@ -7,7 +7,7 @@
 
 ## 一句话
 
-**一条半自动化的 Agent 工具调用评测集生产线**：40 条人工种子 → 591 条候选 → 自动质检 + 人工抽检 → v1.0 → 两 Agent 实测 → 衰退检测 + 三策略演进 → v1.1 → badcase 反向流回种子库（闭环）。
+**一条半自动化的 Agent 工具调用评测集生产线**：40 条人工种子 → 591 条候选 → 自动质检 + 人工抽检 → v1.0 → 两 Agent 实测 → 衰退检测 + 约束加强演进 → v1.1 → badcase 反向流回种子库（闭环）。
 
 ## 项目结构
 
@@ -25,7 +25,7 @@ ZZwork/
 ├── generator/        ← 种子膨胀 + LLM 改写 + 反向注入
 ├── validator/        ← 自动质检 + 人工抽检 CLI + 发布工具
 ├── evaluator/        ← Agent 适配 + 归一化 + 三维判分 + 评测 pipeline
-├── updater/          ← 衰退检测 + 三策略演进 + v1.x 发布
+├── updater/          ← 衰退检测 + 约束加强演进 + v1.x 发布
 ├── reports/          ← Markdown 报告生成
 ├── data/
 │   ├── seeds.json                  ← 40 原始 + 8 反向注入 = 48
@@ -84,16 +84,16 @@ pytest tests/ -q                                          # 全套 130 个测试
 | `data/version_history/benchmark_v1.1.0.json` | 衰退演进后 |
 | `data/reports/quality_report_v1.0.0.md` | 三维 LLM-Judge 均分 4.89-4.98 |
 | `data/reports/evaluation_v1.0.0.md` | DeepSeek 96.16 / Qwen 86.83 |
-| `data/reports/decay_report_v1.1.0.md` | before/after Δ均分 **-14.48**（404 task） |
+| `data/reports/decay_report_v1.1.0.md` | before/after Δ均分 **-12.39**（384 task，constraint_tighten 单策略） |
 | `CHANGELOG.md` | v1.0 → v1.1 演化证据链 |
 
 ## 设计要点速览
 
 - **三维判分**：`0.3·tool_recall(F1) + 0.3·tool_order(LCS) + 0.4·argument_accuracy`（顺序贪心 + `matched_expected_idx` 防刷分）
-- **演进策略**（`md5(task_id) % 3` 稳定哈希分配）：
-  - `precondition_injection`：头部注入安全前置工具
-  - `constraint_tighten`：末尾追加审计通知
-  - `adversarial_escalation`：prompt 追加诱导文字 + 强制审计日志
+- **演进策略**（`md5(task_id) % len(STRATEGIES)` 稳定哈希分配）：
+  - `constraint_tighten`（**v1.1 已激活**）：末尾追加 `Send_Notification(channel="Audit")` 审计通知 — 在所有 Skill 的 `allowed_tools` 内，与 v1.0 本体 100% 自洽
+  - `precondition_injection`（**v1.2 预留**）：头部注入安全前置工具（如 `Log_Event`）— 需先升级 Skill 本体 `allowed_tools`
+  - `adversarial_escalation`（**v1.2 预留**）：prompt 追加诱导文字 + 强制审计日志 — 需先升级 Skill 本体 `allowed_tools`
 - **反向注入命名空间**：`T_<SKILL>_FB_NNN`（避开原 `_V00..V19` 变体后缀）
 - **版本冻结**：所有评测脚本吃版本号，不吃"最新版"——保证跨时点分数可比
 

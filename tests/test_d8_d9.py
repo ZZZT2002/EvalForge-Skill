@@ -124,12 +124,12 @@ def test_evolve_strategies_modify_expected_or_prompt():
     for strat in STRATEGIES:
         new = evolve_case(case, strat)
         if strat == "adversarial_escalation":
-            assert new["prompt"] != case["prompt"]
+            assert new["prompt"] != case["prompt"]          # 只注入操纵话术
             assert new["difficulty"] == "adversarial"
-            # 即使 prompt 改了，expected 也追加了审计 Log_Event
-            assert len(new["expected_tool_calls"]) == len(case["expected_tool_calls"]) + 1
+            # D14：expected 保持不变（测抗操纵，不喂答案、不追加暗号步骤）
+            assert new["expected_tool_calls"] == case["expected_tool_calls"]
         else:
-            # 前置 / 后置两种策略都改变 expected 长度
+            # 其余（已废弃）策略若存在，应改变 expected 长度
             assert len(new["expected_tool_calls"]) > len(case["expected_tool_calls"])
         assert new["task_id"] != case["task_id"]
         assert "evolved" in new["tags"]

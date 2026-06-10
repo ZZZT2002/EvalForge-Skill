@@ -1,5 +1,15 @@
 # 第三次答疑演讲稿（6/2）
 
+> ⚠️ **DEPRECATED — 本稿为 2026-06-02 第三次答疑时的快照**
+> - **答辩使用稿请见 [`PRESENTATION.md`](PRESENTATION.md)（6/4 终验答辩完整稿）**
+> - 本文中 "三策略 / 404 条衰退 / -14.48 Δ均分" 等数据是 6/2 当时跑出的，**已过时**：
+>   - 6/3 设计自洽性修复后，v1.1 baseline 仅激活 `constraint_tighten`（与 v1.0 Skill 本体 `allowed_tools` 100% 自洽）
+>   - 另两种策略 (`precondition_injection`, `adversarial_escalation`) 移入 `_FUTURE_STRATEGIES`，启用前需先升级 Skill 本体（规划于 v1.2）
+>   - 新数据：384 条衰退 / Δ均分 -12.39（release 默认场景），见 `data/reports/decay_report_v1.1.0.md`
+> - 保留本稿仅作为项目演化时间线记录，**不作答辩使用**。
+
+---
+
 > 项目：EvalForge-Skill
 > 当前进度：D7–D10（阶段 5 + 阶段 6 已完成）
 > 讲述时长：约 10 分钟

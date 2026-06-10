@@ -1,6 +1,6 @@
 """三维判分单元测试（PROJECT.md §8.5 / PLAN D7）
 
-这是答辩技术深度的核心证据，覆盖 8 个关键场景。
+覆盖 8 个关键场景。
 """
 from evaluator.scorer import calculate_skill_score, score_breakdown
 

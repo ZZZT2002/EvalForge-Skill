@@ -18,7 +18,7 @@ import json
 import random
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import config
 from evaluator.adapters.base import BaseAdapter, MockAdapter
@@ -56,7 +56,13 @@ def stratified_sample(
     return sampled[:n]
 
 
-def _build_real_adapter(agent: str, dry_run: bool, benchmark: List[dict]) -> BaseAdapter:
+def _build_real_adapter(
+    agent: str,
+    dry_run: bool,
+    benchmark: List[dict],
+    model: Optional[str] = None,
+) -> BaseAdapter:
+    """model 为 None 时用各适配器的默认模型；否则覆盖（--model 透传）。"""
     if dry_run:
         responses = build_simulated_responses(benchmark, error_rate=0.20, seed=99)
         a = MockAdapter(responses=responses)
@@ -64,10 +70,17 @@ def _build_real_adapter(agent: str, dry_run: bool, benchmark: List[dict]) -> Bas
         return a
     if agent == "deepseek":
         from evaluator.adapters.deepseek_adapter import DeepSeekAdapter
-        return DeepSeekAdapter()
+        return DeepSeekAdapter(model=model) if model else DeepSeekAdapter()
+    if agent == "qwen":
+        from evaluator.adapters.qwen_adapter import QwenAdapter
+        return QwenAdapter(model=model) if model else QwenAdapter()
     if agent == "openai":
         from evaluator.adapters.openai_adapter import OpenAIAdapter
+        # OpenAIAdapter 目前是预留空壳，不接受 model 参数
         return OpenAIAdapter()
+    if agent == "doubao":
+        from evaluator.adapters.doubao_adapter import DoubaoAdapter
+        return DoubaoAdapter(model=model) if model else DoubaoAdapter()
     raise ValueError(f"未知 agent: {agent}")
 
 
@@ -79,21 +92,22 @@ def run_sample(
     dry_run: bool,
     output_dir: str,
     seed: int = 7,
+    model: Optional[str] = None,
 ) -> dict:
     benchmark = load_benchmark(version)
     sample = stratified_sample(benchmark, n=n, seed=seed)
 
     print(f"[sample_real_eval] 抽样 {len(sample)} / {len(benchmark)} 条 "
-          f"(agent={agent}, dry_run={dry_run})")
+          f"(agent={agent}, model={model or '默认'}, dry_run={dry_run})")
 
-    adapter = _build_real_adapter(agent, dry_run=dry_run, benchmark=sample)
+    adapter = _build_real_adapter(agent, dry_run=dry_run, benchmark=sample, model=model)
     records = evaluate(sample, adapter)
     bc = collect_badcases(records, agent_name=agent)
     avg = sum(r["score"]["total"] for r in records) / len(records) if records else 0.0
     print(f"[sample_real_eval] 均分={avg:.2f}, badcase={len(bc)}")
 
     suffix = "real_sample_dryrun" if dry_run else "real_sample"
-    md_path = f"{output_dir}/evaluation_v{version}_{suffix}.md"
+    md_path = f"{output_dir}/evaluation_v{version}_{agent}_{suffix}.md"
     generate_evaluation_report(
         version=f"v{version}-{suffix}",
         results_by_agent={agent: records},
@@ -101,13 +115,14 @@ def run_sample(
     )
     print(f"[sample_real_eval] 报告 → {md_path}")
 
-    bc_path = f"{output_dir}/badcases_{suffix}.json"
+    bc_path = f"{output_dir}/badcases_{agent}_{suffix}.json"
     save_json(bc, bc_path)
     print(f"[sample_real_eval] badcase → {bc_path}")
 
     return {
         "version": f"v{version}",
         "agent": agent,
+        "model": model or "默认",
         "dry_run": dry_run,
         "n_sampled": len(sample),
         "mean_score": round(avg, 2),
@@ -120,7 +135,9 @@ def main() -> int:
     p = argparse.ArgumentParser(description="REAL 模式抽样评测（默认 100 条分层抽样）")
     p.add_argument("--n", type=int, default=100)
     p.add_argument("--version", default="1.0.0")
-    p.add_argument("--agent", default="deepseek", choices=["deepseek", "openai"])
+    p.add_argument("--agent", default="deepseek", choices=["deepseek", "qwen", "openai", "doubao"])
+    p.add_argument("--model", default=None,
+                   help="覆盖适配器默认模型，如 deepseek-v4-flash / qwen3.7-max；不传用各适配器默认值")
     p.add_argument("--dry-run", action="store_true", help="用 MockAdapter 顶替真 API")
     p.add_argument("--output-dir", default=config.REPORTS_DIR)
     p.add_argument("--seed", type=int, default=7)
@@ -133,6 +150,7 @@ def main() -> int:
         dry_run=args.dry_run,
         output_dir=args.output_dir,
         seed=args.seed,
+        model=args.model,
     )
     print("\n=== Sample Eval ===")
     print(json.dumps(stats, ensure_ascii=False, indent=2))

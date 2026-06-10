@@ -1,5 +1,5 @@
 """D9 演进发布主驱动（PROJECT.md §9）
-
+自动发现 v1.0 中的"简单题"（所有模型都会做的），给它们注入诱导话术升级成 v1.1 对抗题，并验证升级效果。
 流程：
   1. 加载 v1.0 benchmark
   2. MOCK 评测 v1.0 → results_by_agent
@@ -9,6 +9,16 @@
   6. before/after 对照实验：复用 v1.0 同份 mock 响应跑 v1.1 衰退子集
   7. 写 data/reports/decay_report_v1.1.0.md
   8. 更新 CHANGELOG
+
+[1/5] 加载 v1.0 + 评测
+   ↓ 找出所有模型都高分的题
+[2/5] 衰退检测
+   ↓ 得到需要升级的题目列表
+[3/5] 演进生成 v1.1
+   ↓ 注入诱导话术，生成新 benchmark
+[4/5] before/after 对照实验
+   ↓ 用同一份模型回答对比分数变化
+[5/5] 生成报告 + 更新 CHANGELOG
 
 CLI： python -m updater.release
 """
@@ -138,7 +148,7 @@ def run(
 
     summary_lines = [
         f"基于 v{version_old} 评测结果检出 {len(decay)} 条衰退 task（mean ≥ DECAY_THRESHOLD）",
-        f"应用三种演进策略：" + ", ".join(f"{k}={v}" for k, v in strat_stats.items()),
+        f"应用演进策略：" + ", ".join(f"{k}={v}" for k, v in strat_stats.items()),
         f"benchmark 规模：{len(v10)} → {len(v11)} 条",
         f"before/after 对照：衰退 task 平均 Δ均分 = {avg_delta:+.2f}",
         f"完整对照见 `{report_path}`",

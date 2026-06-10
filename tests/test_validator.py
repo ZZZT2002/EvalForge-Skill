@@ -52,13 +52,24 @@ def test_validate_one_unknown_skill():
     assert not ok and reason.startswith("unknown_skill")
 
 
-def test_validate_one_tool_not_in_skill():
+def test_validate_one_unknown_tool():
+    # D14：白名单已全开为 9 个工具；只有"根本不存在的工具名"才被拒
     bad = _clone(VALID_CASE)
     bad["expected_tool_calls"] = [
-        {"tool": "Mask_PII", "args": {"data": "x", "fields": ["a"]}},  # SecureAdminExecution 不允许
+        {"tool": "Frobnicate", "args": {}},  # 不在 TOOLS_SCHEMA 中
     ]
     ok, reason = validate_one(bad)
-    assert not ok and reason.startswith("tool_not_in_skill_allowed")
+    assert not ok and reason.startswith("unknown_tool")
+
+
+def test_validate_one_cross_skill_tool_now_allowed():
+    # D14：取消硬白名单后，schema 内的工具在任何 Skill 下都放行（Mask_PII 之前被 SecureAdminExecution 拒）
+    case = _clone(VALID_CASE)
+    case["expected_tool_calls"] = [
+        {"tool": "Mask_PII", "args": {"data": "x", "fields": ["a"]}},
+    ]
+    ok, reason = validate_one(case)
+    assert ok, reason
 
 
 def test_validate_one_bad_difficulty():

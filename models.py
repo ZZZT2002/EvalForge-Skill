@@ -1,4 +1,7 @@
-"""Pydantic 数据契约（PROJECT.md §4）"""
+"""Pydantic 数据契约（PROJECT.md §4）
+定义整个评测框架中所有核心数据结构的「标准格式」
+用 Pydantic 规定了 Skill、测试用例、期望输出长什么样，确保数据在流转过程中格式正确、不出错。
+"""
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 

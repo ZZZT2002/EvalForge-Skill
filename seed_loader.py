@@ -1,8 +1,10 @@
 """加载 data/seeds.json 并 hydrate SkillDefinition。
+为了在 JSON 文件里少写重复内容，加载时自动补全Skill 的"名字"里的完整语义。
 
 seeds.json 用 `skill_name` 字符串简写引用 4 个 Skill 本体（避免 40 次重复内嵌）；
 加载时把 skill_name 替换为 skills_ontology.SKILLS 里的完整 SkillDefinition，
 得到符合 models.TestCase 模型的对象列表。
+
 """
 import json
 from typing import List
